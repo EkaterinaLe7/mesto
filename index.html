@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <link rel="stylesheet" href="./pages/style.css">
+    <title>Проект: Место</title>
+</head>
+<body class="page">
+  <div class="page__container">
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+        <div class="profile__info">
+          <div class="profile__wrapper">
+            <h1 class="profile__name">
+              Жак-Ив Ксто
+            </h1>
+            <button class="profile__edit-button" type="button"></button>
+          </div>
+          <p class="profile__occupation">
+            Исследователь океана
+          </p>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+      <section class="elements">
+        <ul class="places">
+          <li class="place">
+            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
+            <div class="place__description">
+              <p class="place_name">
+                Карачаевск
+              </p>
+              <button class="place_like-btn" type="button"></button>
+            </div>
+          </li>
+          <li class="places__item">
+            <img class="place__img" src="./images/photo-elbrus.jpg" alt="Закат над холмами">
+            <div class="place__description">
+              <p class="place_name">
+                Гора Эльбрус
+              </p>
+              <button class="place_like-btn" type="button"></button>
+            </div>
+          </li>
+          <li class="places__item">
+            <img class="place__img" src="./images/photo-dombai.jpg" alt="Лес на фоне заснеженных гор">
+            <div class="place__description">
+              <p class="place_name">
+                Домбай
+              </p>
+              <button class="place_like-btn" type="button"></button>
+            </div>
+          </li>
+          <li class="places__item">
+            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
+            <div class="place__description">
+              <p class="place_name">
+                Карачаевск
+              </p>
+              <button class="place_like-btn" type="button"></button>
+            </div>
+          </li>
+          <li class="places__item">
+            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
+            <div class="place__description">
+              <p class="place_name">
+                Карачаевск
+              </p>
+              <button class="place_like-btn" type="button"></button>
+              <button class="place_like-btn place_like-btn_active" type="button"></button>
+            </div>
+          </li>
+          <li class="places__item">
+            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
+            <div class="place__description">
+              <p class="place_name">
+                Карачаево-Черкесская республика
+              </p>
+              <button class="place_like-btn" type="button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">
+        © 2023 Mesto Russia
+      </p>
+    </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">
+          Редактировать профиль
+        </h2>
+        <form class="popup__form" method="post">
+          <input class="popup__input popup__input_content_name" type="text" name="username" value="Жак-Ив Кусто" required>
+          <input class="popup__input popup__input_content_occupation" type="text" name="useroccupation" value="Исследователь океана">
+          <button class="popup__button-save" type="submit">
+            Сохранить
+          </button>
+        </form>
+        <button class="popup__button-close" type="button"></button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
