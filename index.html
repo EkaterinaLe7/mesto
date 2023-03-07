@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
     <link rel="stylesheet" href="./pages/style.css">
-    <title>Проект: Место</title>
+    <title>Mesto</title>
 </head>
 <body class="page">
   <div class="page__container">
-    <header class="header">
+    <header class="header page__item-centered">
       <div class="header__logo"></div>
     </header>
-    <main class="content">
+    <main class="content page__container-centered">
       <section class="profile">
         <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
         <div class="profile__info">
           <div class="profile__wrapper">
             <h1 class="profile__name">
-              Жак-Ив Ксто
+              Жак-Ив Кусто
             </h1>
             <button class="profile__edit-button" type="button"></button>
           </div>
@@ -30,66 +30,65 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
-        <ul class="places">
-          <li class="place">
-            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
-            <div class="place__description">
-              <p class="place_name">
-                Карачаевск
+        <ul class="photo-items">
+          <li class="photo-item">
+            <img class="photo-item__img" src="./images/photo-cappadocia.jpg" alt="Воздушные шары на фоне долины">
+            <div class="photo-item__description">
+              <p class="photo-item__title">
+                Каппадокия
               </p>
-              <button class="place_like-btn" type="button"></button>
+              <button class="photo-item__like-btn photo-item__like-btn_active" type="button"></button>
             </div>
           </li>
-          <li class="places__item">
-            <img class="place__img" src="./images/photo-elbrus.jpg" alt="Закат над холмами">
-            <div class="place__description">
-              <p class="place_name">
+          <li class="photo-item">
+            <img class="photo-item__img" src="./images/photo-elbrus.jpg" alt="Закат над холмами">
+            <div class="photo-item__description">
+              <p class="photo-item__title">
                 Гора Эльбрус
               </p>
-              <button class="place_like-btn" type="button"></button>
+              <button class="photo-item__like-btn" type="button"></button>
             </div>
           </li>
-          <li class="places__item">
-            <img class="place__img" src="./images/photo-dombai.jpg" alt="Лес на фоне заснеженных гор">
-            <div class="place__description">
-              <p class="place_name">
+          <li class="photo-item">
+            <img class="photo-item__img" src="./images/photo-dombai.jpg" alt="Лес на фоне заснеженных гор">
+            <div class="photo-item__description">
+              <p class="photo-item__title">
                 Домбай
               </p>
-              <button class="place_like-btn" type="button"></button>
+              <button class="photo-item__like-btn" type="button"></button>
             </div>
           </li>
-          <li class="places__item">
-            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
-            <div class="place__description">
-              <p class="place_name">
-                Карачаевск
+          <li class="photo-item">
+            <img class="photo-item__img" src="./images/photo-iceland.jpg" alt="Река между скал">
+            <div class="photo-item__description">
+              <p class="photo-item__title">
+                Исландия
               </p>
-              <button class="place_like-btn" type="button"></button>
+              <button class="photo-item__like-btn" type="button"></button>
             </div>
           </li>
-          <li class="places__item">
-            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
-            <div class="place__description">
-              <p class="place_name">
-                Карачаевск
+          <li class="photo-item">
+            <img class="photo-item__img" src="./images/photo-alpen.jpg" alt="Коровы на фоне гор">
+            <div class="photo-item__description">
+              <p class="photo-item__title">
+                Альпы
               </p>
-              <button class="place_like-btn" type="button"></button>
-              <button class="place_like-btn place_like-btn_active" type="button"></button>
+              <button class="photo-item__like-btn" type="button"></button>
             </div>
           </li>
-          <li class="places__item">
-            <img class="place__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
-            <div class="place__description">
-              <p class="place_name">
+          <li class="photo-item">
+            <img class="photo-item__img" src="./images/photo-karachaevsk.jpg" alt="Замок на фоне холма">
+            <div class="photo-item__description">
+              <p class="photo-item__title">
                 Карачаево-Черкесская республика
               </p>
-              <button class="place_like-btn" type="button"></button>
+              <button class="photo-item__like-btn" type="button"></button>
             </div>
           </li>
         </ul>
       </section>
     </main>
-    <footer class="footer">
+    <footer class="footer page__container-centered">
       <p class="footer__copyright">
         © 2023 Mesto Russia
       </p>
@@ -99,9 +98,9 @@
         <h2 class="popup__title">
           Редактировать профиль
         </h2>
-        <form class="popup__form" method="post">
-          <input class="popup__input popup__input_content_name" type="text" name="username" value="Жак-Ив Кусто" required>
-          <input class="popup__input popup__input_content_occupation" type="text" name="useroccupation" value="Исследователь океана">
+        <form class="popup__form" method="post" name="infoform">
+          <input class="popup__input popup__input_content_name" type="text" name="username" value="Жак-Ив Кусто" placeholder="Имя" required>
+          <input class="popup__input popup__input_content_occupation" type="text" name="useroccupation" value="Исследователь океана" placeholder="Профессия">
           <button class="popup__button-save" type="submit">
             Сохранить
           </button>
