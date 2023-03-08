@@ -60,7 +60,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 680px) {
   .page__container-centered {
     width: calc(100% - 25px*2);
   }
@@ -170,7 +170,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 700px) {
   .profile {
     flex-direction: column;
   }
@@ -208,9 +208,14 @@
 }
 
 
+@media screen and (max-width: 770px) {
+  .profile__info {
+    margin: 0 8px 0 20px;
+  }
+}
 
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 700px) {
   .profile__info {
     margin: 0 0 32px 0;
   }
@@ -234,7 +239,7 @@
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 700px) {
   .profile__wrapper {
     margin-bottom: 8px;
     margin-left: 30px;
@@ -277,7 +282,6 @@
   .profile__name {
     font-size: 32px;
     text-align: center;
-    margin-right: 10px;
   }
 }
 
@@ -286,6 +290,7 @@
     font-size: 27px;
     line-height: 1.22;
     max-width: 189px;
+    margin-right: 10px;
   }
 }
 
@@ -339,7 +344,7 @@
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 700px) {
   .profile__occupation {
     text-align: center;
   }
@@ -373,7 +378,7 @@
   opacity: .6;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 700px) {
   .profile__add-button {
     margin: 0;
     max-width: 282px;
@@ -563,6 +568,7 @@
   padding: 0 0 13px;
 
 }
+
 
 .popup__input:focus {
   outline: none;
