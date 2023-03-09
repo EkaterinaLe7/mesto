@@ -14,19 +14,17 @@ function popupOpen () {
   jobInput.value = profileJob.textContent;
 };
 
-editButton.addEventListener('click', popupOpen);
-
 function popupClose () {
   popup.classList.remove('popup_opened');
 }
-
-closeButton.addEventListener('click', popupClose);
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+  popupClose ()
 }
 
+editButton.addEventListener('click', popupOpen);
+closeButton.addEventListener('click', popupClose);
 formElemen.addEventListener('submit', handleFormSubmit);
-saveButton.addEventListener('click', popupClose);
