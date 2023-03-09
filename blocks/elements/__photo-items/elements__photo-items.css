@@ -1,4 +1,4 @@
-.photo-items {
+.elements__photo-items {
   display: grid;
   list-style: none;
   grid-template-columns: repeat(auto-fit, 282px);
