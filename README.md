@@ -13,7 +13,7 @@
 * Java Script
   
 Ознакомиться с сайтом вы можете на GitHub Pages по ссылке:  
-https://ekaterinale7.github.io/russian-travel/index.html  
+https://ekaterinale7.github.io/mesto/index.html  
   
 Контактная информация:  
 Екатeрина Лечицкая  
