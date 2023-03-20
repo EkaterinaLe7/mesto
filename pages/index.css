@@ -16,6 +16,7 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/elements/__photo-items/elements__photo-items.css);
 @import url(../blocks/photo-item/photo-item.css);
+@import url(../blocks/photo-item/__delete-btn/photo-item__delete-btn.css);
 @import url(../blocks/photo-item/__img/photo-item__img.css);
 @import url(../blocks/photo-item/__description/photo-item__description.css);
 @import url(../blocks/photo-item/__title/photo-item__title.css);
