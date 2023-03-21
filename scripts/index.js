@@ -126,6 +126,11 @@ function handleCardLike (event) {
   likeButton.classList.toggle('photo-item__like-btn_active');
  }
 
+// Функция удаления карточки
+function handleCardDelete (event) {
+  const card = event.target.closest('.photo-item');
+  card.remove();
+ }
 
 
 editButton.addEventListener('click', openEditPopup);
