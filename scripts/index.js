@@ -120,6 +120,11 @@ function handleAddCardFormSubmit (evt) {
   closePopup(popupAddImage);
 };
 
+// Функция добавления лайка карточке
+function handleCardLike (event) {
+  const likeButton = event.target.closest('.photo-item__like-btn');
+  likeButton.classList.toggle('photo-item__like-btn_active');
+ }
 
 
 
