@@ -48,6 +48,15 @@ const photoItemsElements = document.querySelector('.elements__photo-items');
 const photoCard = document.querySelector('.photo-item');
 
 
+
+
+
+
+// Открытие карточки
+function openImageCard () {
+  openPopup(popupOpenImage);
+};
+
 // Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -82,6 +91,7 @@ function openAddCardPopup () {
 function createPhotoCard (item) {
   const photoTemplate = document.querySelector('.photo-template').content;
   const photoItem = photoTemplate.querySelector('.photo-item').cloneNode(true);
+
   photoItem.querySelector('.photo-item__img').src = item.link;
   photoItem.querySelector('.photo-item__img').alt = item.name;
   photoItem.querySelector('.photo-item__title').textContent = item.name;
@@ -91,6 +101,26 @@ function createPhotoCard (item) {
 
   const deleteButton = photoItem.querySelector('.photo-item__delete-btn');
   deleteButton.addEventListener('click', handleCardDelete);
+
+  // Переменные для открытия карточки
+  const popupOpenImageCard = document.querySelector('.popup_type_image');
+
+
+  // Открытие карточки
+  const cardImage = photoItem.querySelector('.photo-item__img');
+  cardImage.addEventListener('click', () => {
+    openPopup(popupOpenImageCard);
+
+    const popupImage = popupOpenImageCard.querySelector('.popup__image');
+    const popupTitle = popupOpenImageCard.querySelector('.popup__figcaption');
+
+    popupImage.src = photoItem.querySelector('.photo-item__img').src;
+    popupImage.alt = photoItem.querySelector('.photo-item__img').alt;
+    popupTitle.textContent = photoItem.querySelector('.photo-item__title').textContent;
+  });
+
+  const closeImageCardButton = popupOpenImageCard.querySelector('.popup__button-close');
+  closeImageCardButton.addEventListener('click', () => closePopup(popupOpenImageCard));
 
   return photoItem;
 };
