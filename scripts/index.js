@@ -119,6 +119,7 @@ function createPhotoCard (item) {
     popupTitle.textContent = photoItem.querySelector('.photo-item__title').textContent;
   });
 
+  //Закрытие карточки
   const closeImageCardButton = popupOpenImageCard.querySelector('.popup__button-close');
   closeImageCardButton.addEventListener('click', () => closePopup(popupOpenImageCard));
 
