@@ -26,31 +26,26 @@ const initialCards = [
 ];
 
 
-let editButton = document.querySelector('.profile__edit-button');
-let addButton = document.querySelector('.profile__add-button');
-let profileName = document.querySelector('.profile__name');
-let profileJob= document.querySelector('.profile__occupation');
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const profileName = document.querySelector('.profile__name');
+const profileJob= document.querySelector('.profile__occupation');
 
 // Переменные для редактирования профиля
-let popupEditProfile = document.querySelector('.popup_type_profile-edit');
-let closeEditProfileButton = popupEditProfile.querySelector('.popup__button-close');
-let saveEditProfileButton= popupEditProfile.querySelector('.popup__button-save');
-let formElementEditProfile = popupEditProfile.querySelector('.popup__form');
-let nameInput = popupEditProfile.querySelector('.popup__input_content_name');
-let jobInput = popupEditProfile.querySelector('.popup__input_content_occupation');
+const popupEditProfile = document.querySelector('.popup_type_profile-edit');
+const closeEditProfileButton = popupEditProfile.querySelector('.popup__button-close');
+const saveEditProfileButton= popupEditProfile.querySelector('.popup__button-save');
+const formElementEditProfile = popupEditProfile.querySelector('.popup__form');
+const nameInput = popupEditProfile.querySelector('.popup__input_content_name');
+const jobInput = popupEditProfile.querySelector('.popup__input_content_occupation');
 
 // Переменные для добавления карточек
-let popupAddImage = document.querySelector('.popup_type_image-add');
-let closeAddImageButton = popupAddImage.querySelector('.popup__button-close');
-let formElementAddCard = popupAddImage.querySelector('.popup__form');
+const popupAddImage = document.querySelector('.popup_type_image-add');
+const closeAddImageButton = popupAddImage.querySelector('.popup__button-close');
+const formElementAddCard = popupAddImage.querySelector('.popup__form');
 
 const photoItemsElements = document.querySelector('.elements__photo-items');
 const photoCard = document.querySelector('.photo-item');
-
-
-
-
-
 
 // Открытие карточки
 function openImageCard () {
@@ -102,7 +97,7 @@ function createPhotoCard (item) {
   const deleteButton = photoItem.querySelector('.photo-item__delete-btn');
   deleteButton.addEventListener('click', handleCardDelete);
 
-  // Переменные для открытия карточки
+  // Переменная для открытия карточки
   const popupOpenImageCard = document.querySelector('.popup_type_image');
 
 
