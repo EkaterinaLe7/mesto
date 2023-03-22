@@ -47,11 +47,6 @@ const formElementAddCard = popupAddImage.querySelector('.popup__form');
 const photoItemsElements = document.querySelector('.elements__photo-items');
 const photoCard = document.querySelector('.photo-item');
 
-// Открытие карточки
-function openImageCard () {
-  openPopup(popupOpenImage);
-};
-
 // Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -98,7 +93,7 @@ function createPhotoCard (item) {
   deleteButton.addEventListener('click', handleCardDelete);
 
   // Переменная для открытия карточки
-  const popupOpenImageCard = document.querySelector('.popup_type_image');
+  const popupOpenImageCard = document.querySelector('.popup_type_card-opened');
 
   // Функция открытия карточки
   function openCardImage () {
