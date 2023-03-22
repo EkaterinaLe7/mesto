@@ -100,19 +100,21 @@ function createPhotoCard (item) {
   // Переменная для открытия карточки
   const popupOpenImageCard = document.querySelector('.popup_type_image');
 
+  // Функция открытия карточки
+  function openCardImage () {
+    openPopup(popupOpenImageCard);
+
+      const popupImage = popupOpenImageCard.querySelector('.popup__image');
+      const popupTitle = popupOpenImageCard.querySelector('.popup__figcaption');
+
+      popupImage.src = photoItem.querySelector('.photo-item__img').src;
+      popupImage.alt = photoItem.querySelector('.photo-item__img').alt;
+      popupTitle.textContent = photoItem.querySelector('.photo-item__title').textContent;
+  };
 
   // Открытие карточки
   const cardImage = photoItem.querySelector('.photo-item__img');
-  cardImage.addEventListener('click', () => {
-    openPopup(popupOpenImageCard);
-
-    const popupImage = popupOpenImageCard.querySelector('.popup__image');
-    const popupTitle = popupOpenImageCard.querySelector('.popup__figcaption');
-
-    popupImage.src = photoItem.querySelector('.photo-item__img').src;
-    popupImage.alt = photoItem.querySelector('.photo-item__img').alt;
-    popupTitle.textContent = photoItem.querySelector('.photo-item__title').textContent;
-  });
+  cardImage.addEventListener('click', openCardImage);
 
   //Закрытие карточки
   const closeImageCardButton = popupOpenImageCard.querySelector('.popup__button-close');
