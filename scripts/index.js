@@ -33,19 +33,30 @@ const profileJob= document.querySelector('.profile__occupation');
 
 // Переменные для редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_profile-edit');
-const closeEditProfileButton = popupEditProfile.querySelector('.popup__button-close');
 const saveEditProfileButton= popupEditProfile.querySelector('.popup__button-save');
 const formElementEditProfile = popupEditProfile.querySelector('.popup__form');
 const nameInput = popupEditProfile.querySelector('.popup__input_content_name');
 const jobInput = popupEditProfile.querySelector('.popup__input_content_occupation');
 
+// Переменная для создания карточки
+const photoTemplate = document.querySelector('.photo-template').content;
+
+// Переменная для открытия карточки
+const popupOpenImageCard = document.querySelector('.popup_type_card-opened');
+const popupImage = popupOpenImageCard.querySelector('.popup__image');
+const popupTitle = popupOpenImageCard.querySelector('.popup__figcaption');
+
 // Переменные для добавления карточек
 const popupAddImage = document.querySelector('.popup_type_image-add');
-const closeAddImageButton = popupAddImage.querySelector('.popup__button-close');
 const formElementAddCard = popupAddImage.querySelector('.popup__form');
+const titleAddPopupInput = popupAddImage.querySelector('.popup__input_content_title');
+const imageAddPopupInput = popupAddImage.querySelector('.popup__input_content_image');
 
 const photoItemsElements = document.querySelector('.elements__photo-items');
 const photoCard = document.querySelector('.photo-item');
+
+// Переменная для закрытия попапа
+const closeButtons = document.querySelectorAll('.popup__button-close');
 
 // Функция открытия попапа
 function openPopup(popup) {
@@ -55,7 +66,12 @@ function openPopup(popup) {
 // Функция закрытия попапа
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
-}
+};
+
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 // Редактирование профиля
 function openEditPopup () {
@@ -79,7 +95,6 @@ function openAddCardPopup () {
 
 // Функция создания карточки
 function createPhotoCard (item) {
-  const photoTemplate = document.querySelector('.photo-template').content;
   const photoItem = photoTemplate.querySelector('.photo-item').cloneNode(true);
 
   const cardImage = photoItem.querySelector('.photo-item__img');
@@ -94,35 +109,23 @@ function createPhotoCard (item) {
   const deleteButton = photoItem.querySelector('.photo-item__delete-btn');
   deleteButton.addEventListener('click', handleCardDelete);
 
-  // Переменная для открытия карточки
-  const popupOpenImageCard = document.querySelector('.popup_type_card-opened');
-
   // Функция открытия карточки
   function openCardImage () {
     openPopup(popupOpenImageCard);
-
-      const popupImage = popupOpenImageCard.querySelector('.popup__image');
-      const popupTitle = popupOpenImageCard.querySelector('.popup__figcaption');
-
       popupImage.src = cardImage.src;
       popupImage.alt = cardImage.alt;
-      popupTitle.textContent = photoItem.cardTitle.textContent;
+      popupTitle.textContent = cardTitle.textContent;
   };
 
   // Открытие карточки
   cardImage.addEventListener('click', openCardImage);
 
-  //Закрытие карточки
-  const closeImageCardButton = popupOpenImageCard.querySelector('.popup__button-close');
-  closeImageCardButton.addEventListener('click', () => closePopup(popupOpenImageCard));
-
   return photoItem;
 };
 
 // Добавление карточек из массива
-initialCards.forEach (function (item) {
+initialCards.forEach ((item) => {
   const newCard = createPhotoCard (item);
-
   photoItemsElements.append(newCard);
 });
 
@@ -130,16 +133,13 @@ initialCards.forEach (function (item) {
 function handleAddCardFormSubmit (evt) {
   evt.preventDefault();
 
-  const titleAddPopupInput = popupAddImage.querySelector('.popup__input_content_title');
-  const imageAddPopupInput = popupAddImage.querySelector('.popup__input_content_image');
-
   const card = {
     name: titleAddPopupInput.value,
     link: imageAddPopupInput.value
   };
 
   const newCard = createPhotoCard (card);
-  photoItemsElements.prepend(newCard);
+  photoItemsElements.prepend (newCard);
 
   closePopup(popupAddImage);
 };
@@ -159,7 +159,5 @@ function handleCardDelete (event) {
 
 editButton.addEventListener('click', openEditPopup);
 addButton.addEventListener('click', openAddCardPopup);
-closeEditProfileButton.addEventListener('click', () => {closePopup(popupEditProfile)});
-closeAddImageButton.addEventListener('click', () => {closePopup(popupAddImage)});
 formElementEditProfile.addEventListener('submit', handleEditFormSubmit);
 formElementAddCard.addEventListener('submit', handleAddCardFormSubmit);
