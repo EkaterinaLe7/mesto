@@ -69,7 +69,7 @@ function handleEditFormSubmit (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEditProfile);
-}
+};
 
 // Открытие формы для добавления карточек
 function openAddCardPopup () {
@@ -82,9 +82,11 @@ function createPhotoCard (item) {
   const photoTemplate = document.querySelector('.photo-template').content;
   const photoItem = photoTemplate.querySelector('.photo-item').cloneNode(true);
 
-  photoItem.querySelector('.photo-item__img').src = item.link;
-  photoItem.querySelector('.photo-item__img').alt = item.name;
-  photoItem.querySelector('.photo-item__title').textContent = item.name;
+  const cardImage = photoItem.querySelector('.photo-item__img');
+  const cardTitle = photoItem.querySelector('.photo-item__title');
+  cardImage.src = item.link;
+  cardImage.alt = item.name;
+  cardTitle.textContent = item.name;
 
   const addlikeButton = photoItem.querySelector('.photo-item__like-btn');
   addlikeButton.addEventListener('click', handleCardLike);
@@ -102,13 +104,12 @@ function createPhotoCard (item) {
       const popupImage = popupOpenImageCard.querySelector('.popup__image');
       const popupTitle = popupOpenImageCard.querySelector('.popup__figcaption');
 
-      popupImage.src = photoItem.querySelector('.photo-item__img').src;
-      popupImage.alt = photoItem.querySelector('.photo-item__img').alt;
-      popupTitle.textContent = photoItem.querySelector('.photo-item__title').textContent;
+      popupImage.src = cardImage.src;
+      popupImage.alt = cardImage.alt;
+      popupTitle.textContent = photoItem.cardTitle.textContent;
   };
 
   // Открытие карточки
-  const cardImage = photoItem.querySelector('.photo-item__img');
   cardImage.addEventListener('click', openCardImage);
 
   //Закрытие карточки
@@ -118,7 +119,7 @@ function createPhotoCard (item) {
   return photoItem;
 };
 
-//Добавление карточек из массива
+// Добавление карточек из массива
 initialCards.forEach (function (item) {
   const newCard = createPhotoCard (item);
 
@@ -147,13 +148,13 @@ function handleAddCardFormSubmit (evt) {
 function handleCardLike (event) {
   const likeButton = event.target.closest('.photo-item__like-btn');
   likeButton.classList.toggle('photo-item__like-btn_active');
- }
+ };
 
 // Функция удаления карточки
 function handleCardDelete (event) {
   const card = event.target.closest('.photo-item');
   card.remove();
- }
+ };
 
 
 editButton.addEventListener('click', openEditPopup);
