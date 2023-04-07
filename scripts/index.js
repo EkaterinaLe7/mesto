@@ -1,29 +1,4 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 
 
 const editButton = document.querySelector('.profile__edit-button');
@@ -33,7 +8,7 @@ const profileJob= document.querySelector('.profile__occupation');
 
 // Переменные для редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_profile-edit');
-const saveEditProfileButton= popupEditProfile.querySelector('.popup__button-save');
+const saveEditProfileButton= popupEditProfile.querySelector('.popup__button');
 const formElementEditProfile = popupEditProfile.querySelector('.popup__form');
 const nameInput = popupEditProfile.querySelector('.popup__input_content_name');
 const jobInput = popupEditProfile.querySelector('.popup__input_content_occupation');
@@ -58,29 +33,79 @@ const photoCard = document.querySelector('.photo-item');
 // Переменная для закрытия попапа
 const closeButtons = document.querySelectorAll('.popup__button-close');
 
+// Переменная для закрытия попапа по нажатию на overlay
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
+
 // Функция открытия попапа
-function openPopup(popup) {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEscape);
+};
+
+//Дезактивация кнопки при откратии попапа
+const disableButtonOpenPopup = (popup) => {
+  const formButton = popup.querySelector('.popup__button');
+  disableButton(formButton, {inactiveButtonClass: validationConfig.inactiveButtonClass});
+}
+
+// Скрытие ошибок при откратии попапа
+const hideErrors = (form) => {
+  const inputs = form.querySelectorAll('.popup__input');
+
+  inputs.forEach(input => {
+    hideInputError(form, input);
+  })
 };
 
 // Функция закрытия попапа
-function closePopup (popup) {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEscape);
 };
 
+// Закрытие попапа при нажатии на кнопку закрытия
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
 
+
+// Функция закрытия попапа по нажатию на overlay
+const closePopupByClickOnOverlay = () => {
+
+  popupList.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget) {
+        closePopup(popup);
+      }
+    });
+  })
+}
+
+closePopupByClickOnOverlay()
+
+// Функция закрытия попапа по нажатию на Escape
+const closePopupByEscape = (evt) => {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    if (activePopup) {
+      closePopup(activePopup);
+    };
+  };
+ }
+
+
 // Редактирование профиля
-function openEditPopup () {
+const openEditPopup = () => {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  disableButtonOpenPopup(popupEditProfile);
+  hideErrors(formElementEditProfile);
 };
 
-function handleEditFormSubmit (evt) {
+const handleEditFormSubmit = (evt) => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -88,13 +113,27 @@ function handleEditFormSubmit (evt) {
 };
 
 // Открытие формы для добавления карточек
-function openAddCardPopup () {
+const openAddCardPopup = () => {
   openPopup(popupAddImage);
   formElementAddCard.reset();
+  disableButtonOpenPopup(popupAddImage);
+  hideErrors(formElementAddCard);
 };
 
+// Функция добавления лайка карточке
+const handleCardLike = (event) => {
+  const likeButton = event.target.closest('.photo-item__like-btn');
+  likeButton.classList.toggle('photo-item__like-btn_active');
+ };
+
+ // Функция удаления карточки
+const handleCardDelete = (event) => {
+  const card = event.target.closest('.photo-item');
+  card.remove();
+ };
+
 // Функция создания карточки
-function createPhotoCard (item) {
+const createPhotoCard = (item) => {
   const photoItem = photoTemplate.querySelector('.photo-item').cloneNode(true);
 
   const cardImage = photoItem.querySelector('.photo-item__img');
@@ -130,7 +169,7 @@ initialCards.forEach ((item) => {
 });
 
 // Добавление карточки из формы
-function handleAddCardFormSubmit (evt) {
+const handleAddCardFormSubmit = (evt) => {
   evt.preventDefault();
 
   const card = {
@@ -143,18 +182,6 @@ function handleAddCardFormSubmit (evt) {
 
   closePopup(popupAddImage);
 };
-
-// Функция добавления лайка карточке
-function handleCardLike (event) {
-  const likeButton = event.target.closest('.photo-item__like-btn');
-  likeButton.classList.toggle('photo-item__like-btn_active');
- };
-
-// Функция удаления карточки
-function handleCardDelete (event) {
-  const card = event.target.closest('.photo-item');
-  card.remove();
- };
 
 
 editButton.addEventListener('click', openEditPopup);
