@@ -1,6 +1,3 @@
-
-
-
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
@@ -47,7 +44,7 @@ const openPopup = (popup) => {
 const disableButtonOpenPopup = (popup) => {
   const formButton = popup.querySelector('.popup__button');
   disableButton(formButton, {inactiveButtonClass: validationConfig.inactiveButtonClass});
-}
+};
 
 // Скрытие ошибок при откратии попапа
 const hideErrors = (form) => {
@@ -55,7 +52,7 @@ const hideErrors = (form) => {
 
   inputs.forEach(input => {
     hideInputError(form, input);
-  })
+  });
 };
 
 // Функция закрытия попапа
@@ -80,8 +77,8 @@ const closePopupByClickOnOverlay = () => {
         closePopup(popup);
       }
     });
-  })
-}
+  });
+};
 
 closePopupByClickOnOverlay()
 
@@ -93,7 +90,7 @@ const closePopupByEscape = (evt) => {
       closePopup(activePopup);
     };
   };
- }
+ };
 
 
 // Редактирование профиля
