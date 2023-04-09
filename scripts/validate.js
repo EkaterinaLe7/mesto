@@ -5,31 +5,32 @@ const validationConfig = {
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-}
+};
 
 // Показать ошибки при вводе в полях ввода
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(inputErrorClass);
   formError.textContent = errorMessage;
-  formError.classList.add('popup__error_visible');
+  formError.classList.add(errorClass);
 };
 
 // Убрать ошибки при вводе в полях ввода
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, { inputErrorClass, errorClass }) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  formError.classList.remove('popup__error_visible');
+  inputElement.classList.remove(inputErrorClass);
+  formError.classList.remove(errorClass);
   formError.textContent = '';
 };
 
+
 // Проверка поля ввода на валидность
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, {...rest}) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, rest);
   } else {
-    hideInputError(formElement, inputElement);
-  }
+    hideInputError(formElement, inputElement, rest);
+  };
 };
 
 
@@ -60,7 +61,7 @@ const setEventListeners = (formElement, { inputSelector, submitButtonSelector, .
 
   formInputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, rest);
       if (hasInvalidInput(formInputs)) {
         disableButton(formButton, rest);
       } else {
