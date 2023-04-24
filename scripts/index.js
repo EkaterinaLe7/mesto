@@ -1,5 +1,5 @@
-import {initialCards} from './initial-cards.js';
-import {Card} from './Card.js';
+import { initialCards } from './initial-cards.js';
+import Card from './Card.js';
 import { openPopup, closePopup } from './utils.js';
 
 

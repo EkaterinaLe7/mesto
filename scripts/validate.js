@@ -40,11 +40,11 @@ const enableButton = (button, { inactiveButtonClass }) => {
   button.removeAttribute('disabled');
 };
 
-// Функция дезактивации кнопки
-const disableButton = (button, {inactiveButtonClass}) => {
-  button.classList.add(inactiveButtonClass);
-  button.setAttribute('disabled', true);
-}
+// // Функция дезактивации кнопки
+// const disableButton = (button, {inactiveButtonClass}) => {
+//   button.classList.add(inactiveButtonClass);
+//   button.setAttribute('disabled', true);
+// }
 
 // Проверка: есть ли хоть одно невалидное поле
 const hasInvalidInput = (formInputs) => {

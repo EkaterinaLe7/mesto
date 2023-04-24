@@ -1,6 +1,6 @@
 import { popupImageOpened, photoPopupImage, titlePopupImage, openPopup, openPopupImage } from './utils.js'
 
-export class Card {
+export default class Card {
 	constructor (data, templateSelector) {
 		this._name = data.name;
 		this._link = data.link;
@@ -21,7 +21,6 @@ export class Card {
 
 	generateCard() {
   // Запишем разметку в приватное поле _element.
-  // Так у других элементов появится доступ к ней.
   this._element = this._getTemplate();
   this._setEventListeners()
   // Добавим данные
