@@ -22,11 +22,14 @@ export default class Card {
 	generateCard() {
   // Запишем разметку в приватное поле _element.
   this._element = this._getTemplate();
-  this._setEventListeners()
+
   // Добавим данные
-  this._element.querySelector('.photo-item__img').src = this._link;
-  this._element.querySelector('.photo-item__img').alt = this._link;
+  this._cardImage = this._element.querySelector('.photo-item__img');
+  this._cardImage.src = this._link;
+  this._cardImage.alt = this._link;
   this._element.querySelector('.photo-item__title').textContent = this._name;
+
+  this._setEventListeners();
 
   // Вернём элемент наружу
   return this._element;
@@ -41,7 +44,7 @@ export default class Card {
       this._handleCardDelete();
     });
 
-    this._element.querySelector('.photo-item__img').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._openImageModalWindow();
     });
   }

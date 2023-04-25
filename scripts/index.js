@@ -1,7 +1,8 @@
 import { initialCards } from './initial-cards.js';
 import Card from './Card.js';
 import { openPopup, closePopup } from './utils.js';
-
+import { validationConfig } from './constants.js';
+import FormValidator from './formvalidator.js';
 
 const buttonOpenEditProfile = document.querySelector('.profile__edit-button');
 const buttonOpenAddImageForm = document.querySelector('.profile__add-button');
@@ -37,6 +38,12 @@ const buttonsClosePopup = document.querySelectorAll('.popup__button-close');
 // Переменная для закрытия попапа по нажатию на overlay
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
+const formEditProfileValidation = new FormValidator (validationConfig, formElementEditProfilePopup);
+formEditProfileValidation.enableValidation();
+
+const formAddImageValidation = new FormValidator (validationConfig, formElementAddImageCardPopup);
+formAddImageValidation.enableValidation();
+
 
 // // Функция открытия попапа
 // const openPopup = (popup) => {
@@ -44,20 +51,7 @@ const popupList = Array.from(document.querySelectorAll('.popup'));
 //   document.addEventListener('keydown', closePopupByEscape);
 // };
 
-//Дезактивация кнопки при откратии попапа
-const disableButtonOpenPopup = (popup) => {
-  const formButton = popup.querySelector('.popup__button');
-  disableButton(formButton, {inactiveButtonClass: validationConfig.inactiveButtonClass});
-}
 
-// Скрытие ошибок при откратии попапа
-const hideErrors = (form) => {
-  const inputs = form.querySelectorAll('.popup__input');
-
-  inputs.forEach(input => {
-    hideInputError(form, input, {inputErrorClass: validationConfig.inputErrorClass, errorClass: validationConfig.errorClass});
-  });
-};
 
 // // Функция закрытия попапа
 // const closePopup = (popup) => {
@@ -97,13 +91,40 @@ closePopupByClickOnOverlay()
 //  };
 
 
+
+
+// //Дезактивация кнопки при откратии попапа
+// const disableButtonOpenPopup = (popup) => {
+//   const formButton = popup.querySelector('.popup__button');
+//   disableButton(formButton, {inactiveButtonClass: validationConfig.inactiveButtonClass});
+// }
+
+// // Скрытие ошибок при откратии попапа
+// const hideErrors = (form) => {
+//   const inputs = form.querySelectorAll('.popup__input');
+
+//   inputs.forEach(input => {
+//     hideInputError(form, input, {inputErrorClass: validationConfig.inputErrorClass, errorClass: validationConfig.errorClass});
+//   });
+// };
+
+// // Редактирование профиля
+// const openEditPopup = () => {
+//   openPopup(popupEditProfile);
+//   nameInputEditProfilePopup.value = profileName.textContent;
+//   jobInputEditProfilePopup.value = profileJob.textContent;
+//   disableButtonOpenPopup(popupEditProfile);
+//   hideErrors(formElementEditProfilePopup);
+// };
+
+
 // Редактирование профиля
 const openEditPopup = () => {
   openPopup(popupEditProfile);
   nameInputEditProfilePopup.value = profileName.textContent;
   jobInputEditProfilePopup.value = profileJob.textContent;
-  disableButtonOpenPopup(popupEditProfile);
-  hideErrors(formElementEditProfilePopup);
+  formEditProfileValidation.disableButton();
+  formEditProfileValidation.hideInputValidationErrors();
 };
 
 const handleEditFormSubmit = (evt) => {
@@ -117,9 +138,18 @@ const handleEditFormSubmit = (evt) => {
 const openAddCardPopup = () => {
   openPopup(popupAddImageCard);
   formElementAddImageCardPopup.reset();
-  disableButtonOpenPopup(popupAddImageCard);
-  hideErrors(formElementAddImageCardPopup);
+  formAddImageValidation.disableButton();
+  formAddImageValidation.hideInputValidationErrors();
 };
+
+// // Открытие формы для добавления карточек
+// const openAddCardPopup = () => {
+//   openPopup(popupAddImageCard);
+//   formElementAddImageCardPopup.reset();
+//   disableButtonOpenPopup(popupAddImageCard);
+//   hideErrors(formElementAddImageCardPopup);
+// };
+
 
 // // Функция добавления лайка карточке
 // const handleCardLike = (event) => {

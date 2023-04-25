@@ -1,5 +1,3 @@
-import {validationConfig} from './constants.js'
-
 export default class FormValidator {
   constructor(config, formElement) {
     this._formElement = formElement;
@@ -9,8 +7,8 @@ export default class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-
-    this._Config = Config;
+    this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
 
@@ -23,92 +21,93 @@ export default class FormValidator {
 // };
 
 
-// Показать ошибки при вводе в полях ввода
-_showInputError = (inputElement) => {
-  this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(this._inputErrorClass);
-  this._formError.textContent = inputElement.validationMessage;
-  this._formError.classList.add(this._errorClass);
-};
-
-// Убрать ошибки при вводе в полях ввода
-_hideInputError = (inputElement) => {
-  this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(this._inputErrorClass);
-  this._formError.classList.remove(this._errorClass);
-  this._formError.textContent = '';
-};
-
-
-// // Проверка поля ввода на валидность
-// _checkInputValidity = () => {
-//   if (!this._inputSelector.validity.valid) {
-//     _showInputError();
-//   } else {
-//     hideInputError(formElement, inputElement, rest);
-//   };
-// };
-
-
-// Проверка поля ввода на валидность
-_checkInputValidity = (inputElement) => {
-  if (!inputElement.validity.valid) {
-    this._showInputError(inputElement);
-  } else {
-    this._hideInputError(inputElement);
+  // Показать ошибки при вводе в полях ввода
+  _showInputError = (inputElement) => {
+    this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(this._inputErrorClass);
+    this._formError.textContent = inputElement.validationMessage;
+    this._formError.classList.add(this._errorClass);
   };
-};
+
+  // Убрать ошибки при вводе в полях ввода
+  _hideInputError = (inputElement) => {
+    this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this._inputErrorClass);
+    this._formError.classList.remove(this._errorClass);
+    this._formError.textContent = '';
+  };
+
+  //Убрать ошибки у всех полей ввода, используется в index.js
+  hideInputValidationErrors = () => {
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
+    })
+  }
+
+  // // Проверка поля ввода на валидность
+  // _checkInputValidity = () => {
+  //   if (!this._inputSelector.validity.valid) {
+  //     _showInputError();
+  //   } else {
+  //     hideInputError(formElement, inputElement, rest);
+  //   };
+  // };
 
 
-// Функция активации кнопки
-_enableButton = () => {
-  this._submitButtonSelector.classList.remove(this._inactiveButtonClass);
-  this._submitButtonSelector.removeAttribute('disabled');
-};
+  // Проверка поля ввода на валидность
+  _checkInputValidity = (inputElement) => {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
+    } else {
+      this._hideInputError(inputElement);
+    };
+  };
 
 
-// Функция дезактивации кнопки
-_disableButton = () => {
-  this._submitButtonSelector.classList.add(this._inactiveButtonClass);
-  this._submitButtonSelector.setAttribute('disabled', true);
-}
-
-// Проверка: есть ли хоть одно невалидное поле
-_hasInvalidInput = (formInputs) => {
-  return formInputs.some((inputElement) => {
-    return !inputElement.validity.valid;
-  })
-}
+  // Функция активации кнопки
+  _enableButton = () => {
+    this._submitButton.classList.remove(this._inactiveButtonClass);
+    this._submitButton.removeAttribute('disabled');
+  };
 
 
-_setEventListeners = () => {
-  this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-  this._disableButton();
+  // Функция дезактивации кнопки
+  disableButton = () => {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.setAttribute('disabled', true);
+  }
 
-  this._inputList.forEach((input) => {
-    input.addEventListener('input', () => {
-      this._checkInputValidity(input);
-      if (this._hasInvalidInput(this._inputList)) {
-        this._disableButton();
-      } else {
-        this._enableButton();
-      }
+  // Проверка: есть ли хоть одно невалидное поле
+  _hasInvalidInput = () => {
+    return this._inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    })
+  }
+
+
+  _setEventListeners = () => {
+    this.disableButton();
+
+    this._inputList.forEach((input) => {
+      input.addEventListener('input', () => {
+        this._checkInputValidity(input);
+        if (this._hasInvalidInput()) {
+          this.disableButton();
+        } else {
+          this._enableButton();
+        }
+      });
     });
-  });
-};
+  };
 
 
+  enableValidation = () => {
+      this._formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+    })
 
-
-
-enableValidation = () => {
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-  })
-
-  this._formElement.setEventListeners ();
-}
-
+    this._setEventListeners();
+  }
 
 }
 
