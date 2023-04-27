@@ -20,12 +20,5 @@ const closePopupByEscape = (evt) => {
   };
  };
 
-  // // Функция открытия карточки
-  // const openPopupImage = (card) => {
-  //   openPopup(popupImageOpened);
-  //   photoPopupImage.src = card.link;
-  //   photoPopupImage.alt = card.name;
-  //   titlePopupImage.textContent = card.name;
-  // };
 
-  export { openPopup, closePopup }
+  export { openPopup, closePopup };

@@ -61,15 +61,6 @@ export default class Card {
     this._element.remove();
   }
 
-  // _openImageModalWindow = () => {
-  //   openPopupImage({
-  //     name: this._name,
-  //     link: this._link
-  //   });
-  // }
-
-  // ----
-  //2 var
 
   // Функция открытия карточки с фотографией
   _openImageModalWindow = () => {

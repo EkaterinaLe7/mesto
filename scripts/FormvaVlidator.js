@@ -1,7 +1,6 @@
 export default class FormValidator {
   constructor(config, formElement) {
     this._formElement = formElement;
-    // this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
@@ -10,16 +9,6 @@ export default class FormValidator {
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
-
-
-  // // Показать ошибки при вводе в полях ввода
-// _showInputError = () => {
-//   this._formError = this._formElement.querySelector(`.${this._inputSelectort.id}-error`);
-//   this._inputSelector.classList.add(this._inputErrorClass);
-//   this._formError.textContent = this._inputSelector.validationMessage;
-//   this._formError.classList.add(this._errorClass);
-// };
-
 
   // Показать ошибки при вводе в полях ввода
   _showInputError = (inputElement, errorMessage) => {
@@ -36,18 +25,6 @@ export default class FormValidator {
     this._formError.classList.remove(this._errorClass);
     this._formError.textContent = '';
   };
-
-
-
-  // // Проверка поля ввода на валидность
-  // _checkInputValidity = () => {
-  //   if (!this._inputSelector.validity.valid) {
-  //     _showInputError();
-  //   } else {
-  //     hideInputError(formElement, inputElement, rest);
-  //   };
-  // };
-
 
   // Проверка поля ввода на валидность
   _checkInputValidity = (inputElement) => {
@@ -72,12 +49,14 @@ export default class FormValidator {
     this._submitButton.setAttribute('disabled', true);
   }
 
+
   // Проверка: есть ли хоть одно невалидное поле
   _hasInvalidInput = () => {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }
+
 
    //Убрать ошибки у всех полей ввода, используется в index.js
    resetValidation = () => {
