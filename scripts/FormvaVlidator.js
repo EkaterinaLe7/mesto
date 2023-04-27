@@ -22,10 +22,10 @@ export default class FormValidator {
 
 
   // Показать ошибки при вводе в полях ввода
-  _showInputError = (inputElement) => {
+  _showInputError = (inputElement, errorMessage) => {
     this._formError = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
-    this._formError.textContent = inputElement.validationMessage;
+    this._formError.textContent = errorMessage;
     this._formError.classList.add(this._errorClass);
   };
 
@@ -37,12 +37,7 @@ export default class FormValidator {
     this._formError.textContent = '';
   };
 
-  //Убрать ошибки у всех полей ввода, используется в index.js
-  hideInputValidationErrors = () => {
-    this._inputList.forEach((input) => {
-      this._hideInputError(input);
-    })
-  }
+
 
   // // Проверка поля ввода на валидность
   // _checkInputValidity = () => {
@@ -57,7 +52,7 @@ export default class FormValidator {
   // Проверка поля ввода на валидность
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement);
     };
@@ -72,7 +67,7 @@ export default class FormValidator {
 
 
   // Функция дезактивации кнопки
-  disableButton = () => {
+  _disableButton = () => {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.setAttribute('disabled', true);
   }
@@ -84,15 +79,24 @@ export default class FormValidator {
     })
   }
 
+   //Убрать ошибки у всех полей ввода, используется в index.js
+   resetValidation = () => {
+    this._disableButton();
+
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
+    })
+  }
+
 
   _setEventListeners = () => {
-    this.disableButton();
+    this._disableButton();
 
     this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
         if (this._hasInvalidInput()) {
-          this.disableButton();
+          this._disableButton();
         } else {
           this._enableButton();
         }

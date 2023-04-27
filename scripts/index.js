@@ -2,7 +2,7 @@ import { initialCards } from './initial-cards.js';
 import Card from './Card.js';
 import { openPopup, closePopup } from './utils.js';
 import { validationConfig } from './constants.js';
-import FormValidator from './formvalidator.js';
+import FormValidator from './FormvaVlidator.js';
 
 const buttonOpenEditProfile = document.querySelector('.profile__edit-button');
 const buttonOpenAddImageForm = document.querySelector('.profile__add-button');
@@ -123,8 +123,8 @@ const openEditPopup = () => {
   openPopup(popupEditProfile);
   nameInputEditProfilePopup.value = profileName.textContent;
   jobInputEditProfilePopup.value = profileJob.textContent;
-  formEditProfileValidation.disableButton();
-  formEditProfileValidation.hideInputValidationErrors();
+  // formEditProfileValidation.disableButton();
+  formEditProfileValidation.resetValidation();
 };
 
 const handleEditFormSubmit = (evt) => {
@@ -138,8 +138,8 @@ const handleEditFormSubmit = (evt) => {
 const openAddCardPopup = () => {
   openPopup(popupAddImageCard);
   formElementAddImageCardPopup.reset();
-  formAddImageValidation.disableButton();
-  formAddImageValidation.hideInputValidationErrors();
+  // formAddImageValidation.disableButton();
+  formAddImageValidation.resetValidation();
 };
 
 // // Открытие формы для добавления карточек
