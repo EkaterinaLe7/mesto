@@ -82,18 +82,24 @@ const openAddCardPopup = () => {
   formAddImageValidation.resetValidation();
 };
 
+// Создадим экземпляр карточки
+const generateCardItem = (item, templateSelector) => {
+  const card = new Card(item, templateSelector);
+  const cardElement = card.generateCard();
+
+  return cardElement;
+}
+
 
 // Добавление карточек из массива
 initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item, '.photo-template');
-  const cardElement = card.generateCard();
+  const cardItem = generateCardItem(item, '.photo-template');
 
-  photoItemsElements.append(cardElement);
+  photoItemsElements.append(cardItem);
 });
 
-// Добавление карточки из формы
 
+// Добавление карточки из формы
 const handleAddCardFormSubmit = (evt) => {
   evt.preventDefault();
 
@@ -102,11 +108,8 @@ const handleAddCardFormSubmit = (evt) => {
     link: imageInputAddImageCardPopup.value
   };
 
-  const newCard = new Card(card, '.photo-template');
-
-// Создаём карточку и возвращаем наружу
-  const cardElement = newCard.generateCard();
-  photoItemsElements.prepend (cardElement);
+  const cardItem = generateCardItem(card, '.photo-template');
+  photoItemsElements.prepend (cardItem);
 
   closePopup(popupAddImageCard);
 };

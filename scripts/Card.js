@@ -58,6 +58,7 @@ export default class Card {
   // Функция удаления карточки
   _handleCardDelete = () => {
     this._element.remove();
+    this._element = null;
   }
 
   // Функция открытия карточки с фотографией
