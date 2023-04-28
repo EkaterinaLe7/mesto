@@ -1,6 +1,6 @@
 import { initialCards } from './initial-cards.js';
 import Card from './Card.js';
-import { openPopup, closePopup } from './utils.js';
+import { openPopup, closePopup, openImagePopup } from './utils.js';
 import { validationConfig } from './config.js';
 import FormValidator from './FormValidator.js';
 
@@ -83,8 +83,8 @@ const openAddCardPopup = () => {
 };
 
 // Создадим экземпляр карточки
-const generateCardItem = (item, templateSelector) => {
-  const card = new Card(item, templateSelector);
+const generateCardItem = (item, templateSelector, openImagePopup) => {
+  const card = new Card(item, templateSelector, openImagePopup);
   const cardElement = card.generateCard();
 
   return cardElement;
@@ -93,7 +93,7 @@ const generateCardItem = (item, templateSelector) => {
 
 // Добавление карточек из массива
 initialCards.forEach((item) => {
-  const cardItem = generateCardItem(item, '.photo-template');
+  const cardItem = generateCardItem(item, '.photo-template', openImagePopup);
 
   photoItemsElements.append(cardItem);
 });
@@ -108,7 +108,7 @@ const handleAddCardFormSubmit = (evt) => {
     link: imageInputAddImageCardPopup.value
   };
 
-  const cardItem = generateCardItem(card, '.photo-template');
+  const cardItem = generateCardItem(card, '.photo-template', openImagePopup);
   photoItemsElements.prepend (cardItem);
 
   closePopup(popupAddImageCard);

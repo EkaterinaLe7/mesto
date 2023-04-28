@@ -1,10 +1,9 @@
-import { openImagePopup } from './utils.js';
-
 export default class Card {
-	constructor (data, templateSelector) {
+	constructor (data, templateSelector, openImagePopup) {
 		this._name = data.name;
 		this._link = data.link;
 		this._templateSelector = templateSelector;
+    this._openImagePopup = openImagePopup;
   }
 
 	_getTemplate() {
@@ -46,7 +45,11 @@ export default class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-      this._openImageModalWindow();
+      // Функция открытия карточки с фотографией
+      this._openImagePopup({
+        name: this._name,
+        link: this._link
+      });
     });
   }
 
@@ -61,13 +64,6 @@ export default class Card {
     this._element = null;
   }
 
-  // Функция открытия карточки с фотографией
-  _openImageModalWindow = () => {
-    openImagePopup({
-      name: this._name,
-      link: this._link
-    });
-  }
 
 }
 
