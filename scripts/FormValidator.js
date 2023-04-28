@@ -6,9 +6,10 @@ export default class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
+
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-  }
+  };
 
   // Показать ошибки при вводе в полях ввода
   _showInputError = (inputElement, errorMessage) => {
@@ -47,15 +48,13 @@ export default class FormValidator {
   _disableButton = () => {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.setAttribute('disabled', true);
-  }
+  };
 
 
   // Проверка: есть ли хоть одно невалидное поле
   _hasInvalidInput = () => {
-    return this._inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    })
-  }
+    return this._inputList.some(inputElement => !inputElement.validity.valid)
+  };
 
 
    //Убрать ошибки у всех полей ввода, используется в index.js
@@ -65,7 +64,7 @@ export default class FormValidator {
     this._inputList.forEach((input) => {
       this._hideInputError(input);
     })
-  }
+  };
 
 
   _setEventListeners = () => {
@@ -90,7 +89,7 @@ export default class FormValidator {
     })
 
     this._setEventListeners();
-  }
+  };
 
 }
 

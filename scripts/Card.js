@@ -1,5 +1,4 @@
-import { popupImageOpened, photoPopupImage, titlePopupImage } from './constants.js';
-import { openPopup } from './utils.js';
+import { openImagePopup } from './utils.js';
 
 export default class Card {
 	constructor (data, templateSelector) {
@@ -61,13 +60,12 @@ export default class Card {
     this._element.remove();
   }
 
-
   // Функция открытия карточки с фотографией
   _openImageModalWindow = () => {
-    photoPopupImage.src = this._link;
-    photoPopupImage.alt = this._name;
-    titlePopupImage.textContent = this._name;
-    openPopup(popupImageOpened);
+    openImagePopup({
+      name: this._name,
+      link: this._link
+    });
   }
 
 }

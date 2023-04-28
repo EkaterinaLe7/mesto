@@ -1,8 +1,8 @@
 import { initialCards } from './initial-cards.js';
 import Card from './Card.js';
 import { openPopup, closePopup } from './utils.js';
-import { validationConfig } from './constants.js';
-import FormValidator from './FormvaVlidator.js';
+import { validationConfig } from './config.js';
+import FormValidator from './FormValidator.js';
 
 const buttonOpenEditProfile = document.querySelector('.profile__edit-button');
 const buttonOpenAddImageForm = document.querySelector('.profile__add-button');
@@ -29,6 +29,8 @@ const buttonsClosePopup = document.querySelectorAll('.popup__button-close');
 // Переменная для закрытия попапа по нажатию на overlay
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
+
+// Создание экземпляров класса валидации форм
 const formEditProfileValidation = new FormValidator (validationConfig, formElementEditProfilePopup);
 formEditProfileValidation.enableValidation();
 
@@ -85,10 +87,8 @@ const openAddCardPopup = () => {
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
   const card = new Card(item, '.photo-template');
-  // Создаём карточку и возвращаем наружу
   const cardElement = card.generateCard();
 
-  // Добавляем в DOM
   photoItemsElements.append(cardElement);
 });
 

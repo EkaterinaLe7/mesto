@@ -1,3 +1,9 @@
+// Переменная для открытия карточки
+const popupImageOpened = document.querySelector('.popup_type_card-opened');
+const photoPopupImage = popupImageOpened.querySelector('.popup__image');
+const titlePopupImage = popupImageOpened.querySelector('.popup__figcaption');
+
+
 // Функция открытия попапа
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -20,5 +26,13 @@ const closePopupByEscape = (evt) => {
   };
  };
 
+// Функция открытия карточки
+  const openImagePopup = (card) => {
+    openPopup(popupImageOpened);
+    photoPopupImage.src = card.link;
+    photoPopupImage.alt = card.name;
+    titlePopupImage.textContent = card.name;
+  };
 
-  export { openPopup, closePopup };
+  export { openPopup, openImagePopup, closePopup }
+
