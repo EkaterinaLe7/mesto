@@ -4,7 +4,8 @@ import {
   buttonOpenEditProfile,
   buttonOpenAddImageForm,
   formEdit,
-  formAddImage
+  formAddImage,
+  photoTemplateSelector
  } from '../utils/constants.js';
 import { validationConfig } from '../utils/config.js';
 import Section from '../components/Section.js';
@@ -15,23 +16,25 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
 
-
 // Функция создания карточки
 const generateCardItem = (data) => {
-    const card = new Card(data, '.photo-template', handleCardClick);
+    const card = new Card(
+      data,
+      {
+        handleCardClick: (data) => {
+          imagePopupOpened.openPopup(data);
+        }
+      },
+      photoTemplateSelector
+      );
+
     const cardElement = card.generateCard();
 
     return cardElement;
   }
 
-  // Функция открытия карточки
-const handleCardClick = (data) => {
-  imagePopupOpened.openPopup(data);
-}
-
 const imagePopupOpened = new PopupWithImage('.popup_type_card-opened');
 imagePopupOpened.setEventListeners();
-
 
 const cardList = new Section({
   data: initialCards,
@@ -44,7 +47,6 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-
 // Создание экземпляров класса валидации форм
 const formEditProfileValidation = new FormValidator (validationConfig, formEdit);
 formEditProfileValidation.enableValidation();
@@ -52,14 +54,11 @@ formEditProfileValidation.enableValidation();
 const formAddImageValidation = new FormValidator (validationConfig, formAddImage);
 formAddImageValidation.enableValidation();
 
-
-
 const newUserInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userInfoSelector: '.profile__occupation'
 }
 );
-
 
 const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile-edit',
@@ -70,8 +69,7 @@ const popupEditProfile = new PopupWithForm({
 
 popupEditProfile.setEventListeners();
 
-
-//Открытие поапа для редактирования профиля
+//Открытие попапа для редактирования профиля
 const openEditProfilePopup = () => {
   popupEditProfile.setData(newUserInfo.getUserInfo());
 
@@ -79,14 +77,11 @@ const openEditProfilePopup = () => {
   formEditProfileValidation.resetValidation();
 }
 
-
-//Открытие поапа для добавления карточки
+//Открытие попапа для добавления карточки
 const openAddCardPopup = () => {
   popupAddImageCard.openPopup();
   formAddImageValidation.resetValidation();
 }
-
-
 
 const popupAddImageCard = new PopupWithForm({
   popupSelector: '.popup_type_image-add',
@@ -101,7 +96,6 @@ const popupAddImageCard = new PopupWithForm({
 });
 
 popupAddImageCard.setEventListeners();
-
 
 buttonOpenEditProfile.addEventListener('click', openEditProfilePopup);
 buttonOpenAddImageForm.addEventListener('click', openAddCardPopup);
