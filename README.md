@@ -17,6 +17,7 @@
 * Медиазапросы (Media queries)
 * JavaScript
 * ООП
+* Webpack  
   
 Ознакомиться с сайтом вы можете на GitHub Pages по ссылке:  
 https://ekaterinale7.github.io/mesto/index.html  
