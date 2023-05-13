@@ -1,9 +1,9 @@
 export default class Card {
-	constructor (data, templateSelector, openImagePopup) {
-		this._name = data.name;
-		this._link = data.link;
+	constructor ({name, link}, templateSelector, handleCardClick) {
+		this._name = name;
+		this._link = link;
 		this._templateSelector = templateSelector;
-    this._openImagePopup = openImagePopup;
+    this._handleCardClick = handleCardClick;
   }
 
 	_getTemplate() {
@@ -25,7 +25,7 @@ export default class Card {
   // Добавим данные
   this._cardImage = this._element.querySelector('.photo-item__img');
   this._cardImage.src = this._link;
-  this._cardImage.alt = this._link;
+  this._cardImage.alt = this._name;
   this._element.querySelector('.photo-item__title').textContent = this._name;
 
   this._setEventListeners();
@@ -46,10 +46,10 @@ export default class Card {
 
     this._cardImage.addEventListener('click', () => {
       // Функция открытия карточки с фотографией
-      this._openImagePopup({
-        name: this._name,
-        link: this._link
-      });
+      this._handleCardClick({
+          name: this._name,
+          link: this._link
+        });
     });
   }
 
@@ -63,7 +63,5 @@ export default class Card {
     this._element.remove();
     this._element = null;
   }
-
-
 }
 
