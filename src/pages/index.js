@@ -16,7 +16,25 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import { api } from '../components/Api.js';
 
+// api.getInitialCards()
+//  .then((res) => {
+//     // console.log('res===>', res);
+//     cardList.renderItems(res);
+//  });
+
+//  api.getUserInfo()
+//   .then((res) => {
+//     console.log('res===>', res);
+//     newUserInfo.setUserInfo(res);
+//   });
+
+  api.getAppInfo()
+    .then((results) => {
+      cardList.renderItems(results[0]);
+      newUserInfo.setUserInfo(results[1]);
+    });
 
 // Функция создания карточки
 const generateCardItem = (data) => {
@@ -39,7 +57,7 @@ const imagePopupOpened = new PopupWithImage('.popup_type_card-opened');
 imagePopupOpened.setEventListeners();
 
 const cardList = new Section({
-  data: initialCards,
+  // data: initialCards,
   renderer: (cardItem) => {
     const cardElement = generateCardItem(cardItem);
 
@@ -47,7 +65,7 @@ const cardList = new Section({
   }
 }, cardListSection);
 
-cardList.renderItems();
+
 
 // Создание экземпляров класса валидации форм
 const formEditProfileValidation = new FormValidator (validationConfig, formEdit);
@@ -58,14 +76,19 @@ formAddImageValidation.enableValidation();
 
 const newUserInfo = new UserInfo({
   userNameSelector: '.profile__name',
-  userInfoSelector: '.profile__occupation'
+  userInfoSelector: '.profile__occupation',
+  userAvatarSelector: '.profile__avatar'
 }
 );
 
 const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile-edit',
   handleFormSubmit: (data) => {
-    newUserInfo.setUserInfo(data);
+    api.setUserInfo(data)
+      .then((res) =>{
+        newUserInfo.setUserInfo(res);
+      })
+
   }
 });
 
@@ -88,12 +111,22 @@ const openAddCardPopup = () => {
 const popupAddImageCard = new PopupWithForm({
   popupSelector: '.popup_type_image-add',
   handleFormSubmit: (data) => {
-    const newCardElement = generateCardItem({
-      name: data.photoname,
-      link: data.imagelink
-    });
+    api.createCard(data)
+      .then((res) => {
+        console.log('res!!', res);
+        // const newCardElement = generateCardItem({
+        //   name: res.photoname,
+        //   link: res.imagelink
+        // });
 
-    cardList.addItem(newCardElement, true);
+        const newCardElement = generateCardItem(res);
+
+        cardList.addItem(newCardElement, true);
+      })
+
+
+
+
   }
 });
 
