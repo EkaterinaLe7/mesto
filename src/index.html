@@ -13,7 +13,7 @@
     </header>
     <main class="content page__container-centered">
       <section class="profile">
-        <img class="profile__avatar" src="#" alt="Аватар">
+        <div class="profile__avatar"></div>
         <div class="profile__info">
           <div class="profile__wrapper">
             <h1 class="profile__name"></h1>
@@ -75,6 +75,28 @@
         <button class="popup__button-close"></button>
       </div>
     </div>
+    <div class="popup popup_type_avatar-edit">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" method="post" name="avatarpopup" novalidate>
+          <label class="popup__label">
+            <input class="popup__input popup__input_content_image" type="url" id="avatar-input" name="avatarlink"  placeholder="Ссылка на изображение" required>
+            <span class="popup__error avatar-input-error"></span>
+          </label>
+          <button class="popup__button" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__button-close" type="button"></button>
+      </div>
+    </div>
+    <div class="popup popup_type_confirm-delete">
+      <div class="popup__container">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form" method="post" name="comfirmpopup" novalidate>
+          <button class="popup__button" type="submit">Да</button>
+        </form>
+        <button class="popup__button-close" type="button"></button>
+      </div>
+    </div>
     <template class="photo-template">
       <li class="photo-item">
         <button class="photo-item__delete-btn" type="button"></button>
@@ -83,7 +105,7 @@
           <h2 class="photo-item__title"></h2>
           <div class="photo-item__counter-wrapper">
             <button class="photo-item__like-btn" type="button"></button>
-            <p class="photo-item__like-counter">0</p>
+            <span class="photo-item__like-counter">0</span>
           </div>
         </div>
       </li>

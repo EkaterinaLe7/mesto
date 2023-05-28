@@ -1,4 +1,4 @@
-class Api {
+export default class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -50,6 +50,33 @@ class Api {
     .then(this._checkResponse)
   }
 
+  likeCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(this._checkResponse)
+  }
+
+  deleteLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._checkResponse)
+  }
+
+  editAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatarlink
+      })
+    })
+    .then(this._checkResponse)
+  }
+
   getAppInfo() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()])
   }
@@ -60,10 +87,4 @@ class Api {
 
 
 
-export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
-  headers: {
-    authorization: 'e1c180e3-79bc-4925-aea2-ad0bf0c788ad',
-    'Content-Type': 'application/json'
-  }
-});
+

@@ -12,4 +12,9 @@ export const formEdit = popupEditProfile.querySelector('.popup__form');
 export const popupAddImage = document.querySelector('.popup_type_image-add');
 export const formAddImage = popupAddImage.querySelector('.popup__form');
 
+export const popupEditUserAvatar = document.querySelector('.popup_type_avatar-edit');
+export const formEditAvatar = popupEditUserAvatar.querySelector('.popup__form');
+
 export const photoTemplateSelector = '.photo-template';
+
+export const userAvatar = document.querySelector('.profile__avatar');
