@@ -8,7 +8,7 @@ export default class PopupWithOnlySubmit extends Popup {
   }
 
   setSubmitAction(func) {
-    this._func = func;
+    this._submitFunction = func;
   }
 
   setEventListeners() {
@@ -17,7 +17,7 @@ export default class PopupWithOnlySubmit extends Popup {
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
 
-      this._func();
+      this._submitFunction();
     });
   }
 
