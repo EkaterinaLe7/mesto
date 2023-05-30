@@ -78,11 +78,7 @@ const generateCardItem = (data) => {
     return cardElement;
   }
 
-const poupDeleteCard = new PopupWithOnlySubmit('.popup_type_confirm-delete');
-poupDeleteCard.setEventListeners();
 
-const imagePopupOpened = new PopupWithImage('.popup_type_card-opened');
-imagePopupOpened.setEventListeners();
 
 const cardList = new Section({
   renderer: (cardItem) => {
@@ -94,6 +90,8 @@ const cardList = new Section({
 
 
 // Создание экземпляров класса валидации форм
+
+
 const formEditProfileValidation = new FormValidator (validationConfig, formEdit);
 formEditProfileValidation.enableValidation();
 
@@ -108,6 +106,12 @@ const newUserInfo = new UserInfo({
   userInfoSelector: '.profile__occupation',
 }
 );
+
+const poupDeleteCard = new PopupWithOnlySubmit('.popup_type_confirm-delete');
+poupDeleteCard.setEventListeners();
+
+const imagePopupOpened = new PopupWithImage('.popup_type_card-opened');
+imagePopupOpened.setEventListeners();
 
 const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile-edit',
@@ -163,8 +167,6 @@ const openEditAvatarpopup = () => {
   popupEditAvatar.openPopup();
   formEditAvatarValidation.resetValidation();
 }
-
-
 
 const popupAddImageCard = new PopupWithForm({
   popupSelector: '.popup_type_image-add',
