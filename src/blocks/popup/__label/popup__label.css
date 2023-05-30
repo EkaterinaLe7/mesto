@@ -5,17 +5,18 @@
 }
 
 .popup__label:first-of-type {
-  margin: 54px 0 5px;
+  /* margin: 54px 0 5px; */
+  margin: 0 0 5px;
 }
 
 .popup__label:last-of-type {
   margin-bottom: 13px;
 }
 
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
   .popup__label:first-of-type {
     margin-top: 75px;
   }
-}
+} */
 
 
