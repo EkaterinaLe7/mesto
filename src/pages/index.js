@@ -96,8 +96,6 @@ const cardList = new Section({
 
 
 // Создание экземпляров класса валидации форм
-
-
 const formEditProfileValidation = new FormValidator (validationConfig, formEdit);
 formEditProfileValidation.enableValidation();
 
@@ -110,7 +108,8 @@ formEditAvatarValidation.enableValidation();
 const newUserInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userInfoSelector: '.profile__occupation',
-}
+},
+userAvatar
 );
 
 const poupDeleteCard = new PopupWithOnlySubmit('.popup_type_confirm-delete');
@@ -153,7 +152,7 @@ const popupEditAvatar = new PopupWithForm({
     popupEditAvatar.renderLoading(true);
     api.editAvatar(data)
       .then((res) => {
-        userAvatar.style.backgroundImage = `url(${res.avatar})`;
+        newUserInfo.setUserAvatar(res);
         popupEditAvatar.closePopup();
       })
       .catch((err) => {
@@ -202,15 +201,15 @@ const openAddCardPopup = () => {
 }
 
 api.getAppInfo()
-.then(([cardsArray, userData]) => {
-  newUserInfo.setUserInfo(userData);
-  userAvatar.style.backgroundImage = `url(${userData.avatar})`;
-  userId = userData._id;
-  cardList.renderItems(cardsArray);
-})
-.catch((err) => {
-  console.log(err);
-});
+  .then(([cardsArray, userData]) => {
+    newUserInfo.setUserInfo(userData);
+    newUserInfo.setUserAvatar(userData);
+    userId = userData._id;
+    cardList.renderItems(cardsArray);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 
 
