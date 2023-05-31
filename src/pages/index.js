@@ -44,11 +44,17 @@ const generateCardItem = (data) => {
             .then((res) => {
               card.updateLikes(res.likes)
             })
+            .catch((err) => {
+              console.log(err);
+            })
         },
         handleDislike: () => {
           api.deleteLike(data._id)
             .then((res) => {
               card.updateLikes(res.likes)
+            })
+            .catch((err) => {
+              console.log(err);
             })
         },
         handleDeleteCard: () => {

@@ -4,7 +4,7 @@ export default class Api {
     this._headers = headers;
   }
 
-  _checkResponse(res) {
+  _getResponse(res) {
     if(res.ok) {
       return res.json();
     }
@@ -16,7 +16,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   createCard(data) {
@@ -27,7 +27,7 @@ export default class Api {
         name: data.photoname,
         link: data.imagelink})
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   getUserInfo() {
@@ -35,7 +35,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   setUserInfo(data) {
@@ -47,7 +47,7 @@ export default class Api {
         about: data.useroccupation
       })
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   likeCard(id) {
@@ -55,7 +55,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   deleteLike(id) {
@@ -63,7 +63,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   editAvatar(data) {
@@ -74,7 +74,7 @@ export default class Api {
         avatar: data.avatarlink
       })
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   deliteCard(id) {
@@ -82,17 +82,10 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(this._checkResponse)
+    .then(this._getResponse)
   }
 
   getAppInfo() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()])
   }
   }
-
-
-
-
-
-
-
